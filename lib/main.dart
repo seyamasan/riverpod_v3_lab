@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_v3_lab/providers/user_name_provider.dart';
+import 'package:riverpod_v3_lab/some_specific_error.dart';
 
 void main() {
   runApp(
-    const ProviderScope(child: MyApp())
+    ProviderScope(
+      // リトライの処理をカスタマイズすることもできる
+      // 全ての Provider に対して適用される
+      // この例では、SomeSpecificError の場合はリトライしないようにしている
+      // また、リトライの回数が 5 回を超えた場合もリトライしないようにしている
+      // リトライの間隔を再実行ごとに増やしている
+      retry: (retryCount, error) {
+        if (error is SomeSpecificError) return null;
+        if (5 < retryCount) return null;
+
+        return Duration(seconds: retryCount * 2);
+      },
+      child: const MyApp()
+    )
   );
 }
 

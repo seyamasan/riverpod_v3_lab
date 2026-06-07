@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_v3_lab/providers/user_api_provider.dart';
+import 'package:riverpod_v3_lab/some_specific_error.dart';
 
 part 'user_name_provider.g.dart';
 
@@ -17,7 +18,7 @@ Future<String> userName(Ref ref) async {
   }
 
   if (response.user == null) {
-    throw Exception('ユーザーの情報が存在しません。');
+    throw SomeSpecificError('ユーザーの情報が存在しません。');
   }
 
   return response.user!.name;
