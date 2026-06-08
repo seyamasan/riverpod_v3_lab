@@ -36,7 +36,7 @@ class NewsApi {
       case .success:
         return DummyNewsResponse(
           200, 
-          DummyNews(1, 'マジで美味いラーメン店がオープン！', 'やっぱり日曜の昼は、京都ラーメンでしょ。')
+          DummyNews(1, '🍜 マジで美味いラーメン店がオープン！', 'やっぱり日曜の昼は、京都ラーメンでしょ。')
         );
       case .failure:
         return DummyNewsResponse(500, null);
