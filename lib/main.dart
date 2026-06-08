@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_v3_lab/providers/user_name_provider.dart';
+import 'package:riverpod_v3_lab/providers/user/user_name_provider.dart';
 import 'package:riverpod_v3_lab/some_specific_error.dart';
 
 void main() {

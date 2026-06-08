@@ -40,4 +40,4 @@ final class UserNameProvider
   }
 }
 
-String _$userNameHash() => r'29d8f6f15a106e854ed201d8571bbeeddc0c96b2';
+String _$userNameHash() => r'c0048964629a65d181ec68c907b50dd25c2df11a';

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:riverpod_v3_lab/providers/user_api_provider.dart';
+import 'package:riverpod_v3_lab/providers/user/user_api_provider.dart';
 import 'package:riverpod_v3_lab/some_specific_error.dart';
 
 part 'user_name_provider.g.dart';
@@ -11,7 +11,7 @@ Future<String> userName(Ref ref) async {
   final api = ref.read(userApiProvider);
   final response = await api.fetchUser();
 
-  log('API実行済み: time: ${DateTime.now()}, statusCode=${response.statusCode}');
+  log('userName() API実行済み: time: ${DateTime.now()}, statusCode=${response.statusCode}');
 
   if (response.statusCode != 200) {
     throw Exception('ユーザーの情報の取得に失敗しました。');
