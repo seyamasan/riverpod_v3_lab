@@ -1,5 +1,4 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:riverpod_v3_lab/some_specific_error.dart';
 
 part 'news_api_provider.g.dart';
 
@@ -29,7 +28,7 @@ class NewsApi {
 
   final TestNewsResponseTypes testType = .success; // テスト用のフラグ
 
-  Future<DummyNewsResponse> fetchNews() async {
+  Future<DummyNewsResponse> getTopStories() async {
     // ここで本当は HTTP 通信などをする
     await Future.delayed(const Duration(seconds: 3)); // 擬似的な遅延
 
@@ -47,15 +46,7 @@ class NewsApi {
   }
 }
 
-// 個別の Provider に対してリトライの処理をカスタマイズすることもできる
-Duration? newsApiRetry(int retryCount, Object error) {
-  if (error is SomeSpecificError) return null;
-  if (5 < retryCount) return null;
-
-  return Duration(seconds: retryCount * 2);
-}
-
-@Riverpod(retry: newsApiRetry)
+@riverpod
 NewsApi newsApi(Ref ref) {
   return const NewsApi();
 }

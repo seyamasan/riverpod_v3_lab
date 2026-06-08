@@ -19,7 +19,7 @@ final class NewsApiProvider
     : super(
         from: null,
         argument: null,
-        retry: newsApiRetry,
+        retry: null,
         name: r'newsApiProvider',
         isAutoDispose: true,
         dependencies: null,
@@ -48,4 +48,4 @@ final class NewsApiProvider
   }
 }
 
-String _$newsApiHash() => r'f0b15d74711e8c5e71378cca64450a96959ae810';
+String _$newsApiHash() => r'e18a7840e5cda889ba2ac62bf4746ef6062fd9e2';
