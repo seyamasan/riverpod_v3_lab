@@ -18,6 +18,9 @@ void main() {
 
         return Duration(seconds: retryCount * 2);
       },
+      // リトライを無効化
+      // providerに対して個別にリトライを指定している場合は、そちらが優先される
+      // retry: (_, _) => null,
       child: const MyApp()
     )
   );
