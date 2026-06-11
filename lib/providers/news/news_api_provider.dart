@@ -1,12 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod_v3_lab/test_response_types.dart';
 
 part 'news_api_provider.g.dart';
-
-enum TestNewsResponseTypes {
-  success,
-  failure,
-  newsNotFound,
-}
 
 class DummyNews {
   final int id;
@@ -26,13 +21,11 @@ class DummyNewsResponse {
 class NewsApi {
   const NewsApi();
 
-  final TestNewsResponseTypes testType = .success; // テスト用のフラグ
-
   Future<DummyNewsResponse> getTopStories() async {
     // ここで本当は HTTP 通信などをする
     await Future.delayed(const Duration(seconds: 3)); // 擬似的な遅延
 
-    switch (testType) {
+    switch (TestResponseTypes.testNewsResponseTypes) {
       case .success:
         return DummyNewsResponse(
           200, 

@@ -1,12 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod_v3_lab/test_response_types.dart';
 
 part 'user_api_provider.g.dart';
-
-enum TestResponseTypes {
-  success,
-  failure,
-  userNotFound,
-}
 
 class DummyUser {
   final int id;
@@ -25,13 +20,11 @@ class DummyUserResponse {
 class UserApi {
   const UserApi();
 
-  final TestResponseTypes testType = .success; // テスト用のフラグ
-
   Future<DummyUserResponse> fetchUser() async {
     // ここで本当は HTTP 通信などをする
     await Future.delayed(const Duration(seconds: 3)); // 擬似的な遅延
 
-    switch (testType) {
+    switch (TestResponseTypes.testUserResponseTypes) {
       case .success:
         return DummyUserResponse(200, DummyUser(1, 'seyamasan'));
       case .failure:
