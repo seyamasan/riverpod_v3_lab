@@ -12,7 +12,7 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 普通に今まで通りの使い方で良さそう
-    final viewModel = ref.read(mainViewModelProvider.notifier);
+    final viewModel = ref.watch(mainViewModelProvider.notifier);
 
     final asyncUserName = ref.watch(userNameProvider);
     final userName = asyncUserName.value ?? 'Unknown';
@@ -32,7 +32,7 @@ class MainScreen extends ConsumerWidget {
           // final viewModel = ref.read(mainViewModelProvider.notifier);
           // viewModel.toggleCreateNewsSheet();
 
-          viewModel.toggleCreateNewsSheet();
+          await viewModel.toggleCreateNewsSheet();
         },
         label: const Text('作成'),
         icon: const Icon(Icons.create),
