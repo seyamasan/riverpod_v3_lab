@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_v3_lab/providers/news/create_news_enabled_provider.dart';
+import 'package:riverpod_v3_lab/providers/stream_lab/stream_lab_service_provider.dart';
 import 'package:riverpod_v3_lab/ref_extensions.dart';
 
 part 'main_view_model.g.dart';
@@ -9,7 +10,18 @@ part 'main_view_model.g.dart';
 @riverpod
 class MainViewModel extends _$MainViewModel {
   @override
-  void build() {}
+  void build() {
+    ref.listen<AsyncValue<void>>(
+      // onSlsCompletedProvider, // 同じ値（true）が流れてくる、同じ値は通知されない
+      onSlsCompletedNotifier, // 常にtrueが流れてくる、イベントが来たら常に通知される
+      (prev, next) {
+        // イベントが流れると next が更新される
+        if (next.hasValue) {
+          log('StreamProvider からイベントを受け取りました。');
+        }
+      },
+    );
+  }
 
   Future<void> toggleCreateNewsSheet() async {
     // viewModelのインスタンスがwatchされていれば例外は発生しない
@@ -39,5 +51,7 @@ class MainViewModel extends _$MainViewModel {
     } else {
       log('ニュースの作成が許可されていない。');
     }
+
+    ref.read(streamLabServiceProvider).fetch();
   }
 }
