@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_v3_lab/providers/user/user_api_provider.dart';
-import 'package:riverpod_v3_lab/some_specific_error.dart';
+import 'package:riverpod_v3_lab/core/some_specific_error.dart';
 
 part 'user_name_provider.g.dart';
 

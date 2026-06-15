@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_v3_lab/providers/news/create_news_enabled_provider.dart';
 import 'package:riverpod_v3_lab/providers/stream_lab/stream_lab_service_provider.dart';
-import 'package:riverpod_v3_lab/ref_extensions.dart';
+import 'package:riverpod_v3_lab/core/ref_extensions.dart';
 
 part 'main_view_model.g.dart';
 

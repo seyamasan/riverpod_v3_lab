@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:riverpod_v3_lab/test_response_types.dart';
+import 'package:riverpod_v3_lab/core/test_response_types.dart';
 
 part 'user_api_provider.g.dart';
 
