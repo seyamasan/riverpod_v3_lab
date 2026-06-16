@@ -9,11 +9,3 @@ enum TestNewsResponseTypes {
   failure,
   newsNotFound,
 }
-
-class TestResponseTypes {
-  // user api レスポンスのテスト用のフラグ
-  static TestUserResponseTypes testUserResponseTypes = .success;
-
-  // news api レスポンスのテスト用のフラグ
-  static TestNewsResponseTypes testNewsResponseTypes = .success;
-}

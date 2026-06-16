@@ -48,4 +48,4 @@ final class UserApiProvider
   }
 }
 
-String _$userApiHash() => r'b7d354dd2276d90a6d9f1867f2d322b8d607bcd1';
+String _$userApiHash() => r'2e5774597d44f03dac6a58b58f21453363272078';

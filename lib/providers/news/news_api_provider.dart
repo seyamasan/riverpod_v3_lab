@@ -19,13 +19,17 @@ class DummyNewsResponse {
 }
 
 class NewsApi {
-  const NewsApi();
+  // テスト用にレスポンスタイプをDIできるようにする
+  // retryの挙動を確認するなら、デフォルト値を変更すること
+  const NewsApi({this.testResponseType = TestNewsResponseTypes.success});
+
+  final TestNewsResponseTypes testResponseType;
 
   Future<DummyNewsResponse> getTopStories() async {
     // ここで本当は HTTP 通信などをする
     await Future.delayed(const Duration(seconds: 3)); // 擬似的な遅延
 
-    switch (TestResponseTypes.testNewsResponseTypes) {
+    switch (testResponseType) {
       case .success:
         return DummyNewsResponse(
           200, 
@@ -41,5 +45,5 @@ class NewsApi {
 
 @riverpod
 NewsApi newsApi(Ref ref) {
-  return const NewsApi();
+  return NewsApi();
 }

@@ -18,13 +18,17 @@ class DummyUserResponse {
 }
 
 class UserApi {
-  const UserApi();
+  // テスト用にレスポンスタイプをDIできるようにする
+  // retryの挙動を確認するなら、デフォルト値を変更すること
+  const UserApi({this.testResponseType = TestUserResponseTypes.success});
+
+  final TestUserResponseTypes testResponseType;
 
   Future<DummyUserResponse> fetchUser() async {
     // ここで本当は HTTP 通信などをする
     await Future.delayed(const Duration(seconds: 3)); // 擬似的な遅延
 
-    switch (TestResponseTypes.testUserResponseTypes) {
+    switch (testResponseType) {
       case .success:
         return DummyUserResponse(200, DummyUser(1, 'seyamasan'));
       case .failure:
@@ -37,5 +41,5 @@ class UserApi {
 
 @riverpod
 UserApi userApi(Ref ref) {
-  return const UserApi();
+  return UserApi();
 }
