@@ -4,18 +4,18 @@ import 'package:riverpod_v3_lab/core/test_response_types.dart';
 part 'news_api_provider.g.dart';
 
 class DummyNews {
+  DummyNews(this.id, this.title, this.mainText);
+
   final int id;
   final String title;
   final String mainText;
-
-  DummyNews(this.id, this.title, this.mainText);
 }
 
 class DummyNewsResponse {
+  DummyNewsResponse(this.statusCode, this.news);
+
   final int statusCode;
   final DummyNews? news;
-
-  DummyNewsResponse(this.statusCode, this.news);
 }
 
 class NewsApi {

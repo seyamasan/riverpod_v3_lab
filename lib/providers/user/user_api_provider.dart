@@ -4,17 +4,17 @@ import 'package:riverpod_v3_lab/core/test_response_types.dart';
 part 'user_api_provider.g.dart';
 
 class DummyUser {
+  DummyUser(this.id, this.name);
+
   final int id;
   final String name;
-
-  DummyUser(this.id, this.name);
 }
 
 class DummyUserResponse {
-  final int statusCode;
-  final DummyUser? user;
-
   DummyUserResponse(this.statusCode, this.user);
+
+  final int statusCode;
+  final DummyUser? user;  
 }
 
 class UserApi {
