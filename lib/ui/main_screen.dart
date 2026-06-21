@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_v3_lab/providers/news/top_stories_provider.dart';
@@ -43,7 +45,7 @@ class MainScreen extends ConsumerWidget {
           await viewModel.toggleCreateNewsSheet();
         },
         label: const Text('作成'),
-        icon: const Icon(Icons.create),
+        icon: const Icon(Icons.add),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -53,9 +55,24 @@ class MainScreen extends ConsumerWidget {
             children: [
               // ユーザー名セクション
               const Text('ユーザー名:'),
-              Text(
-                state.userName ?? 'Guest',
-                style: Theme.of(context).textTheme.headlineMedium,
+              Row(
+                mainAxisAlignment: .center,
+                children: [
+                  if (state.canEditName) ...[
+                    GestureDetector(
+                      onTap: () {
+                        log('編集ボタンがタップされたよ！');
+                      },
+                      child: const Icon(Icons.edit),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+
+                  Text(
+                    state.userName ?? 'Guest',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
 
