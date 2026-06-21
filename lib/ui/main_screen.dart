@@ -13,11 +13,16 @@ class MainScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 普通に今まで通りの使い方で良さそう
     final viewModel = ref.watch(mainViewModelProvider.notifier);
-
-    final asyncUserName = ref.watch(userNameProvider);
-    final userName = asyncUserName.value ?? 'Unknown';
+    final state = ref.watch(mainViewModelProvider);
 
     final asyncTopStories = ref.watch(topStoriesProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final asyncUserName = ref.watch(userNameProvider);
+      final userName = asyncUserName.value;
+
+      viewModel.updateUserName(userName);
+    });
     
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +51,7 @@ class MainScreen extends ConsumerWidget {
               // ユーザー名セクション
               const Text('ユーザー名:'),
               Text(
-                userName,
+                state.userName ?? 'Guest',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 16),

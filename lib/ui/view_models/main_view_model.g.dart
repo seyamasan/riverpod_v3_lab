@@ -13,7 +13,7 @@ part of 'main_view_model.dart';
 const mainViewModelProvider = MainViewModelProvider._();
 
 final class MainViewModelProvider
-    extends $NotifierProvider<MainViewModel, void> {
+    extends $NotifierProvider<MainViewModel, MainState> {
   const MainViewModelProvider._()
     : super(
         from: null,
@@ -33,31 +33,31 @@ final class MainViewModelProvider
   MainViewModel create() => MainViewModel();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(void value) {
+  Override overrideWithValue(MainState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<void>(value),
+      providerOverride: $SyncValueProvider<MainState>(value),
     );
   }
 }
 
-String _$mainViewModelHash() => r'a02c2c6c049d4fe95bf7973acd539d23010e2381';
+String _$mainViewModelHash() => r'53a32851a302341b81537844fe64bf5a1ed4e323';
 
-abstract class _$MainViewModel extends $Notifier<void> {
-  void build();
+abstract class _$MainViewModel extends $Notifier<MainState> {
+  MainState build();
   @$mustCallSuper
   @override
   void runBuild() {
-    build();
-    final ref = this.ref as $Ref<void, void>;
+    final created = build();
+    final ref = this.ref as $Ref<MainState, MainState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<void, void>,
-              void,
+              AnyNotifier<MainState, MainState>,
+              MainState,
               Object?,
               Object?
             >;
-    element.handleValue(ref, null);
+    element.handleValue(ref, created);
   }
 }

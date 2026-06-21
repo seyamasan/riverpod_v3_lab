@@ -5,6 +5,7 @@ import 'package:riverpod_v3_lab/providers/news/news_api_provider.dart';
 import 'package:riverpod_v3_lab/providers/news/top_stories_provider.dart';
 import 'package:riverpod_v3_lab/providers/user/user_name_provider.dart';
 import 'package:riverpod_v3_lab/ui/main_screen.dart';
+import 'package:riverpod_v3_lab/ui/states/main_state.dart';
 import 'package:riverpod_v3_lab/ui/view_models/main_view_model.dart';
 
 import '../test_helper.dart';
@@ -14,7 +15,9 @@ class DummyMainViewModel extends MainViewModel {
   int toggleCalledCount = 0;
 
   @override
-  void build() {}
+  MainState build() {
+    return MainState();
+  }
 
   @override
   Future<void> toggleCreateNewsSheet() async {

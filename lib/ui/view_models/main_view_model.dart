@@ -4,13 +4,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_v3_lab/providers/news/create_news_enabled_provider.dart';
 import 'package:riverpod_v3_lab/providers/stream_lab/stream_lab_service_provider.dart';
 import 'package:riverpod_v3_lab/core/ref_extensions.dart';
+import 'package:riverpod_v3_lab/ui/states/main_state.dart';
 
 part 'main_view_model.g.dart';
 
 @riverpod
 class MainViewModel extends _$MainViewModel {
   @override
-  void build() {
+  MainState build() {
     ref.listen<AsyncValue<void>>(
       // onSlsCompletedProvider, // 同じ値（true）が流れてくる、同じ値は通知されない
       onSlsCompletedNotifier, // 常にtrueが流れてくる、イベントが来たら常に通知される
@@ -21,7 +22,11 @@ class MainViewModel extends _$MainViewModel {
         }
       },
     );
+
+    return MainState();
   }
+
+  void updateUserName(String? newUserName) { state = state.copyWith(userName: newUserName); }
 
   Future<void> toggleCreateNewsSheet() async {
     // viewModelのインスタンスがwatchされていれば例外は発生しない
