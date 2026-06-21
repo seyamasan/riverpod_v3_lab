@@ -26,7 +26,9 @@ class MainViewModel extends _$MainViewModel {
     return MainState();
   }
 
-  void updateUserName(String? newUserName) { state = state.copyWith(userName: newUserName); }
+  void updateCanEditName(bool newState) { state = state.copyWith(canEditName: newState); }
+
+  void updateUserName(String? newState) { state = state.copyWith(userName: newState); }
 
   Future<void> toggleCreateNewsSheet() async {
     // viewModelのインスタンスがwatchされていれば例外は発生しない

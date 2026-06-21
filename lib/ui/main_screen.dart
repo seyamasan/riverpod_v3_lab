@@ -21,7 +21,10 @@ class MainScreen extends ConsumerWidget {
       final asyncUserName = ref.watch(userNameProvider);
       final userName = asyncUserName.value;
 
-      viewModel.updateUserName(userName);
+      if (userName != null) {
+        viewModel.updateCanEditName(true);
+        viewModel.updateUserName(userName);
+      }
     });
     
     return Scaffold(
