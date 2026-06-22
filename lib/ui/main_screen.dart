@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_v3_lab/providers/news/top_stories_provider.dart';
@@ -61,7 +59,20 @@ class MainScreen extends ConsumerWidget {
                   if (state.canEditName) ...[
                     GestureDetector(
                       onTap: () {
-                        log('編集ボタンがタップされたよ！');
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text('ボトムシート'),
+                                  Text('です。'),
+                                ],
+                              ),
+                            );
+                          },
+                        );
                       },
                       child: const Icon(Icons.edit),
                     ),
