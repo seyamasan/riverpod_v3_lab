@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_v3_lab/providers/news/top_stories_provider.dart';
 import 'package:riverpod_v3_lab/providers/user/user_name_provider.dart';
 import 'package:riverpod_v3_lab/ui/view_models/main_view_model.dart';
 
-class MainScreen extends ConsumerWidget {
+class MainScreen extends HookConsumerWidget {
   const MainScreen({super.key, required this.title});
 
   final String title;
@@ -15,6 +16,8 @@ class MainScreen extends ConsumerWidget {
     final viewModel = ref.watch(mainViewModelProvider.notifier);
     final state = ref.watch(mainViewModelProvider);
 
+    final textEditingController = useTextEditingController();
+
     final asyncTopStories = ref.watch(topStoriesProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -24,6 +27,7 @@ class MainScreen extends ConsumerWidget {
       if (userName != null) {
         viewModel.updateCanEditName(true);
         viewModel.updateUserName(userName);
+        textEditingController.text = userName;
       }
     });
     
@@ -59,16 +63,33 @@ class MainScreen extends ConsumerWidget {
                   if (state.canEditName) ...[
                     GestureDetector(
                       onTap: () {
+                        // ボトムシートであれこれ入力するのあまり良くないかも。
+                        // 違う方法に変更する予定。
                         showModalBottomSheet(
                           context: context,
+                          isScrollControlled: true,
                           builder: (BuildContext context) {
-                            return Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text('ボトムシート'),
-                                  Text('です。'),
-                                ],
+                            final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
+                            return SingleChildScrollView(
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: bottomInset),
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min, 
+                                    children: [
+                                      TextField(
+                                        controller: textEditingController,
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          labelText: 'Name',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             );
                           },
